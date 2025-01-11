@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: stg_sales
+    description: "Staging table for sales data."
+    columns:
+      - name: order_id
+        description: "Unique identifier for each order."
+        tests:
+          - unique
+          - not_null
+      - name: sales_amount
+        description: "Total sales amount for the order."
+        tests:
+          - not_null
