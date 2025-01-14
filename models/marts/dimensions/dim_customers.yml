@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: "Customer dimension table with surrogate keys."
+    columns:
+      - name: customer_sk
+        description: "Surrogate key generated from customer_id."
+        tests:
+          - unique
+          - not_null
+      - name: customerid
+        description: "Unique identifier for the customer."
+        tests:
+          - unique
+          - not_null
+      - name: personid
+        description: "Reference to the associated person."
+      - name: storeid
+        description: "Reference to the associated store."
+      - name: territoryid
+        description: "Reference to the sales territory."
+      - name: rowguid
+        description: "Globally unique identifier for the customer."
+      - name: last_update_date
+        description: "Date of the last update to the customer record."

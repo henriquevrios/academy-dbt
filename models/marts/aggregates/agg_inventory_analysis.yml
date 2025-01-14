@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: agg_inventory_analysis
+    description: "Aggregated inventory analysis by product"
+    columns:
+      - name: product_id
+        description: "Unique identifier for the product"
+        tests:
+          - not_null
+          - unique
+
+      - name: product_name
+        description: "Name of the product"
+        tests:
+          - not_null
+
+      - name: stock_level
+        description: "Current stock level of the product"
+        tests:
+          - not_null
+
+      - name: stock_status
+        description: "Status of the stock level (Low, Medium, High)"
+        tests:
+          - not_null

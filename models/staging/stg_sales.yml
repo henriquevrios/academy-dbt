@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: stg_sales
+    description: "Staging table for sales order details from Adventure Works."
+    columns:
+      - name: order_id
+        description: "Unique identifier for each sales order."
+        tests:
+          - not_null
+      - name: order_detail_id
+        description: "Unique identifier for each sales order detail."
+        tests:
+          - not_null
+          - unique
+      - name: product_id
+        description: "Identifier for the product sold."
+        tests:
+          - not_null
+      - name: sales_quantity
+        description: "Quantity of products sold in the order."
+      - name: sales_amount
+        description: "Total amount for the sales order, considering unit price and quantity."
+      - name: sales_date
+        description: "The date when the sale was recorded."

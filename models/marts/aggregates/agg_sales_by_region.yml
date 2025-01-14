@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: agg_sales_by_region
+    description: "Aggregated sales data grouped by region."
+    columns:
+      - name: region
+        description: "Name of the region."
+        tests:
+          - not_null
+      - name: total_sales
+        description: "Total sales amount in the region."
+        tests:
+          - not_null
+      - name: total_orders
+        description: "Total number of orders in the region."
+        tests:
+          - not_null

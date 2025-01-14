@@ -1,0 +1,22 @@
+version: 2
+
+sources:
+  - name: adventureworks
+    description: "Source schema for Adventure Works data"
+    database: adventureworks
+    schema: sap_adw
+    tables:
+      - name: customer
+        description: "Customer details"
+      - name: product
+        description: "Product details"
+      - name: productinventory
+        description: "Table containing inventory levels for products in different warehouses."
+      - name: salesorderdetail
+        description: "Sales order detail transactions"
+      - name: salesperson
+        description: "Salesperson information"
+      - name: salesterritory
+        description: "Geographical regions for sales territories"
+      - name: salesorderheader
+        description: "High-level information about sales orders."

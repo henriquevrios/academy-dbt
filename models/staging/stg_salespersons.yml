@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: stg_salespersons
+    description: "Staging table for salesperson data from Adventure Works."
+    columns:
+      - name: salesperson_id
+        description: "Unique identifier for each salesperson."
+        tests:
+          - not_null
+          - unique
+      - name: territory_id
+        description: "Identifier for the sales territory associated with the salesperson."
+      - name: sales_quota
+        description: "Sales quota assigned to the salesperson."
+      - name: bonus_amount
+        description: "Bonus amount earned by the salesperson."
+      - name: commission_percentage
+        description: "Commission percentage for the salesperson."
+      - name: sales_year_to_date
+        description: "Total sales by the salesperson year-to-date."
+      - name: sales_last_year
+        description: "Total sales by the salesperson in the previous year."
+      - name: last_update_date
+        description: "The last date the salesperson's data was updated."

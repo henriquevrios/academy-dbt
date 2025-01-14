@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: agg_sales_by_salesperson
+    description: "Aggregated sales data grouped by salesperson."
+    columns:
+      - name: salesperson_id
+        description: "Unique identifier for each salesperson."
+        tests:
+          - not_null
+      - name: total_sales
+        description: "Total sales amount for the salesperson."
+        tests:
+          - not_null
+      - name: total_orders
+        description: "Total number of orders handled by the salesperson."
+        tests:
+          - not_null
+      - name: max_sales_quota
+        description: "Maximum sales quota achieved by the salesperson."
+      - name: total_bonus
+        description: "Total bonus amount received by the salesperson."

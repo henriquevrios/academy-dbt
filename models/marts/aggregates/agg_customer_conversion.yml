@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: agg_customer_conversion
+    description: "Aggregated data showing customer conversion rates based on total and successful orders."
+    columns:
+      - name: customer_id
+        description: "Unique identifier for the customer."
+        tests:
+          - not_null
+      - name: total_orders
+        description: "Total number of orders placed by the customer."
+        tests:
+          - not_null
+      - name: successful_orders
+        description: "Number of successfully converted orders (with positive sales amount)."
+        tests:
+          - not_null
+      - name: conversion_rate
+        description: "Percentage of successful orders over total orders for the customer."
