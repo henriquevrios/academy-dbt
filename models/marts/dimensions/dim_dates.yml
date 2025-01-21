@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: dim_dates
+    description: "Dimensional model for dates, including year, month, and day details
+      for the specified range."
+    columns:
+      - name: date_sk
+        description: "Surrogate key for the date dimension, formatted as YYYYMMDD."
+        tests:
+          - unique
+          - not_null
+
+      - name: day_date
+        description: "The actual date, including day, month, and year."
+
+      - name: start_date_month
+        description: "The first date of the month containing the given date."
+
+      - name: short_month_name
+        description: "The abbreviated name of the month (e.g., 'Jan', 'Feb')."
+
+      - name: month_year
+        description: "A combination of the month name and year (e.g., 'Jan/2023')."
+
+      - name: start_date_year
+        description: "The first date of the year containing the given date."
+
+      - name: year_number
+        description: "The year number associated with the given date."

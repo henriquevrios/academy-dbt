@@ -1,13 +1,17 @@
 with
-    customers_raw as (
+    customers as (
         select
-            customerid as customer_id
-            , personid as person_id
-            , storeid as store_id
-            , territoryid as territory_id
-            , rowguid
-            , modifieddate as last_update_date
+            *
         from {{ source('adventureworks', 'customer') }}
+    )
+
+    , processed_customers as (
+        select
+            territoryid as territory_id
+            , storeid as store_id
+            , personid as person_id
+            , customerid as customer_id
+        from customers
     )
 
 select
@@ -15,6 +19,4 @@ select
     , person_id
     , store_id
     , territory_id
-    , rowguid
-    , last_update_date
-from customers_raw
+from processed_customers

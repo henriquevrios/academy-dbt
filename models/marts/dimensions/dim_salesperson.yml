@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: dim_salesperson
+    description: "Dimension table for salesperson details."
+    columns:
+      - name: sales_person_id
+        description: "Unique identifier for each salesperson."
+        tests:
+          - unique
+          - not_null
+      - name: full_name
+        description: "Full name of the salesperson."
+      - name: email_address
+        description: "Email address of the salesperson."
+      - name: phone_number
+        description: "Phone number of the salesperson."
+      - name: hire_date
+        description: "Hire date of the salesperson."
+      - name: territory_id
+        description: "Territory assigned to the salesperson."

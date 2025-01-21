@@ -1,44 +1,66 @@
 with
-    enriched_orders as (
+    orders as (
         select
-            o.order_sk as order_sk
-            , o.order_id
-            , o.customer_id
-            , o.salesperson_id
-            , o.total_amount
-            , dd_order.date_sk as order_date_sk
-            , dd_order.date as order_date
-            , dd_due.date_sk as due_date_sk
-            , dd_due.date as due_date
-            , dd_ship.date_sk as ship_date_sk
-            , dd_ship.date as ship_date
-            , o.territory_id
-            , o.is_online_order
-            , o.tax_amount
-            , o.freight_cost
-        from {{ ref('dim_orders') }} o
-        left join {{ ref('dim_date') }} dd_order
-            on o.order_date = dd_order.date
-        left join {{ ref('dim_date') }} dd_due
-            on o.due_date = dd_due.date
-        left join {{ ref('dim_date') }} dd_ship
-            on o.ship_date = dd_ship.date
+            *
+        from {{ ref('stg_salesorder') }}
+    )
+
+    , order_items as (
+        select
+            *
+        from {{ ref('stg_salesorderdetail') }}
+    )
+
+    , credit_cards as (
+        select
+            *
+        from {{ ref('stg_creditcard') }}
+    )
+
+    , enriched_orderlines as (
+        select
+            {{ dbt_utils.generate_surrogate_key(['orders.order_id', 'order_items.order_detail_id']) }} as sk_orderline
+            , to_varchar(date(orders.order_date), 'YYYYMMDD') as date_sk
+            , orders.order_date
+            , orders.order_id
+            , orders.customer_id
+            , orders.bill_to_address_id
+            , orders.sales_person_id
+            , order_items.order_detail_id
+            , order_items.product_id
+            , order_items.order_qty
+            , order_items.unit_price
+            , order_items.unit_price_discount
+            , credit_cards.card_type
+            , order_items.unit_price * (1 - order_items.unit_price_discount) * order_items.order_qty as net_amount
+            , orders.subtotal
+            , orders.taxamt
+            , orders.freight
+            , orders.total_due
+        from orders
+        left join order_items
+            on orders.order_id = order_items.order_id
+        left join credit_cards
+            on orders.creditcard_id = credit_cards.creditcard_id
     )
 
 select
-    order_sk
+    sk_orderline
+    , date_sk
+    , order_date
     , order_id
     , customer_id
-    , salesperson_id
-    , total_amount
-    , order_date_sk
-    , order_date
-    , due_date_sk
-    , due_date
-    , ship_date_sk
-    , ship_date
-    , territory_id
-    , is_online_order
-    , tax_amount
-    , freight_cost
-from enriched_orders
+    , bill_to_address_id
+    , sales_person_id
+    , order_detail_id
+    , product_id
+    , order_qty
+    , unit_price
+    , unit_price_discount
+    , card_type
+    , net_amount
+    , subtotal
+    , taxamt
+    , freight
+    , total_due
+from enriched_orderlines

@@ -2,17 +2,31 @@ version: 2
 
 models:
   - name: agg_sales_by_region
-    description: "Aggregated sales data grouped by region."
+    description: "Aggregate sales data by region, including territory, state/province, and country."
     columns:
-      - name: region
-        description: "Name of the region."
+      - name: territory_id
+        description: "ID of the sales territory."
         tests:
           - not_null
-      - name: total_sales
-        description: "Total sales amount in the region."
-        tests:
-          - not_null
+
+      - name: state_or_province_name
+        description: "Name of the state or province associated with the sales region."
+
+      - name: country_name
+        description: "Name of the country associated with the sales region."
+
       - name: total_orders
         description: "Total number of orders in the region."
         tests:
           - not_null
+
+      - name: total_sales
+        description: "Total sales amount in the region."
+        tests:
+          - not_null
+
+      - name: total_tax
+        description: "Total tax amount in the region."
+
+      - name: total_freight
+        description: "Total freight cost in the region."

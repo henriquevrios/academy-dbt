@@ -2,34 +2,70 @@ version: 2
 
 models:
   - name: dim_products
-    description: "Dimension table containing details about products, enriched with a surrogate key."
+    description: "Dimensional model for products, containing detailed product attributes for analysis."
     columns:
-      - name: product_sk
-        description: "Surrogate key generated for unique product identification."
-        tests:
-          - not_null
-          - unique
       - name: product_id
-        description: "Original unique identifier for each product."
+        description: "Unique identifier for each product."
         tests:
+          - unique
           - not_null
+
       - name: product_name
         description: "Name of the product."
-        tests:
-          - not_null
+
       - name: product_number
-        description: "Unique product number or code."
-      - name: product_color
+        description: "Unique identifier for the product within the inventory system."
+
+      - name: color
         description: "Color of the product, if applicable."
+
+      - name: make_flag
+        description: "Indicator if the product is manufactured in-house."
+
+      - name: finished_goods_flag
+        description: "Indicator if the product is a finished good."
+
+      - name: safety_stock_level
+        description: "Minimum quantity of stock that must be available."
+
+      - name: reorder_point
+        description: "Quantity at which new stock should be ordered."
+
       - name: standard_cost
         description: "Standard cost to produce the product."
+
       - name: list_price
-        description: "Retail price of the product."
-      - name: product_size
+        description: "Price at which the product is sold to customers."
+
+      - name: size
         description: "Size of the product, if applicable."
-      - name: product_weight
+
+      - name: size_unit_measure_code
+        description: "Unit of measure for the product size (e.g., cm, inch)."
+
+      - name: weight
         description: "Weight of the product, if applicable."
-      - name: last_update_date
-        description: "Date when the product information was last updated."
-        tests:
-          - not_null
+
+      - name: weight_unit_measure_code
+        description: "Unit of measure for the product weight (e.g., kg, lb)."
+
+      - name: days_to_manufacture
+        description: "Number of days required to manufacture the product."
+
+      - name: product_line
+        description: "Product line or category (e.g., 'Sports', 'Casual')."
+
+      - name: class
+        description: "Product class (e.g., 'High', 'Medium', 'Low')."
+
+      - name: style
+        description: "Product style (e.g., 'Unisex', 'Men', 'Women')."
+
+      - name: product_model_id
+        description: "Identifier for the product model associated with this product."
+
+      - name: product_subcategory_id
+        description: "Identifier for the product subcategory."
+
+      - name: sell_start_date
+        description: "Date when the product became available for sale."
