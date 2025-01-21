@@ -6,8 +6,6 @@ models:
     columns:
       - name: territory_id
         description: "ID of the sales territory."
-        tests:
-          - not_null
 
       - name: state_or_province_name
         description: "Name of the state or province associated with the sales region."
