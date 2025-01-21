@@ -1,18 +1,20 @@
 with
-    customers_raw as (
+    customers_fact_raw as (
         select
-            customerid as customer_id
-            , personid as person_id
-            , storeid as store_id
-            , territoryid as territory_id
-            , modifieddate as last_update_date
-        from {{ source('adventureworks', 'customer') }}
+            customer_id
+            , person_id
+            , store_id
+            , territory_id
+            , rowguid
+            , last_update_date
+        from {{ ref('dim_customers') }}
     )
+
 select
     customer_id
     , person_id
     , store_id
     , territory_id
+    , rowguid
     , last_update_date
-from
-    customers_raw
+from customers_fact_raw

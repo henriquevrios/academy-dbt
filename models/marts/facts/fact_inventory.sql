@@ -1,17 +1,15 @@
 with
-    inventory_raw as (
+    aggregated_inventory as (
         select
-            productid as product_id
-            , locationid as warehouse_id
-            , quantity as stock_level
-            , modifieddate as last_update_date
-        from {{ source('adventureworks', 'productinventory') }}
+            product_id
+            , sum(stock_level) as total_stock_level
+            , max(last_update_date) as last_update_date
+        from {{ ref('int_inventory_movements') }}
+        group by product_id
     )
 
 select
     product_id
-    , warehouse_id
-    , stock_level
+    , total_stock_level as stock_level
     , last_update_date
-from
-    inventory_raw
+from aggregated_inventory

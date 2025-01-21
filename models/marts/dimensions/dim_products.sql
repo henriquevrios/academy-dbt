@@ -1,27 +1,36 @@
 with
     products_raw as (
         select
-            *
-        from {{ source('adventureworks', 'product') }}
+            product_id
+            , product_name
+            , product_number
+            , color as product_color
+            , standard_cost
+            , list_price
+            , size as product_size
+            , weight as product_weight
+            , subcategory_id
+            , last_update_date
+        from {{ ref('stg_products') }}
     )
 
     , products_with_sk as (
         select
-            {{ dbt_utils.generate_surrogate_key(['productid']) }} as product_sk
+            {{ dbt_utils.generate_surrogate_key(['product_id']) }} as product_sk
             , *
         from products_raw
     )
 
 select
     product_sk
-    , productid as product_id
-    , name as product_name
-    , productnumber as product_number
-    , color as product_color
-    , standardcost as standard_cost
-    , listprice as list_price
-    , size as product_size
-    , weight as product_weight
-    , modifieddate as last_update_date
-from
-    products_with_sk
+    , product_id
+    , product_name
+    , product_number
+    , product_color
+    , standard_cost
+    , list_price
+    , product_size
+    , product_weight
+    , subcategory_id
+    , last_update_date
+from products_with_sk

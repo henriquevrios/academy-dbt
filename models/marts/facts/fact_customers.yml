@@ -2,26 +2,20 @@ version: 2
 
 models:
   - name: fact_customers
-    description: "Fact table that consolidates customer details."
+    description: "Fact table containing customer information."
     columns:
       - name: customer_id
         description: "Unique identifier for the customer."
         tests:
           - not_null
           - unique
-      - name: customer_name
-        description: "Full name of the customer."
-        tests:
-          - not_null
-      - name: email
-        description: "Email address of the customer."
-        tests:
-          - not_null
-      - name: phone
-        description: "Phone number of the customer."
-        tests:
-          - not_null
+      - name: person_id
+        description: "Identifier of the person associated with the customer."
+      - name: store_id
+        description: "Identifier of the store associated with the customer."
+      - name: territory_id
+        description: "Identifier of the territory associated with the customer."
+      - name: rowguid
+        description: "Row unique identifier for tracking changes."
       - name: last_update_date
-        description: "The most recent date when the customer data was updated."
-        tests:
-          - not_null
+        description: "The date when the customer record was last updated."

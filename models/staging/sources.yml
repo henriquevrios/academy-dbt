@@ -6,6 +6,8 @@ sources:
     database: adventureworks
     schema: sap_adw
     tables:
+      - name: address
+        description: "Table containing address data"
       - name: customer
         description: "Customer details"
       - name: product
@@ -19,4 +21,4 @@ sources:
       - name: salesterritory
         description: "Geographical regions for sales territories"
       - name: salesorderheader
-        description: "High-level information about sales orders."
+        description: "High-level information about sales orders"

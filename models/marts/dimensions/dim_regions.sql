@@ -1,9 +1,9 @@
 with 
     regions_raw as (
         select
-            distinct territoryid as region_id
-            , name as region_name
-        from {{ source('adventureworks', 'salesterritory') }}
+            region_id
+            , region_name
+        from {{ ref('stg_regions') }}
     )
 
     , regions_with_sk as (

@@ -8,12 +8,8 @@ models:
         description: "Unique identifier for the product."
         tests:
           - not_null
-      - name: warehouse_id
-        description: "Unique identifier for the warehouse location."
-        tests:
-          - not_null
       - name: stock_level
-        description: "Current stock level of the product in the warehouse."
+        description: "Current stock level of the product."
         tests:
           - not_null
       - name: last_update_date
