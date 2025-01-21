@@ -2,21 +2,28 @@ version: 2
 
 models:
   - name: agg_sales_by_salesperson
-    description: "Aggregated sales data grouped by salesperson."
+    description: "Aggregate sales data by salesperson, including total orders, sales, tax, and freight."
     columns:
-      - name: salesperson_id
-        description: "Unique identifier for each salesperson."
+      - name: sales_person_id
+        description: "ID of the salesperson."
         tests:
           - not_null
-      - name: total_sales
-        description: "Total sales amount for the salesperson."
-        tests:
-          - not_null
+
+      - name: sales_person_name
+        description: "Full name of the salesperson."
+
       - name: total_orders
         description: "Total number of orders handled by the salesperson."
         tests:
           - not_null
-      - name: max_sales_quota
-        description: "Maximum sales quota achieved by the salesperson."
-      - name: total_bonus
-        description: "Total bonus amount received by the salesperson."
+
+      - name: total_sales
+        description: "Total sales amount attributed to the salesperson."
+        tests:
+          - not_null
+
+      - name: total_tax
+        description: "Total tax amount attributed to the salesperson."
+
+      - name: total_freight
+        description: "Total freight cost attributed to the salesperson."

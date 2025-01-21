@@ -2,23 +2,151 @@ version: 2
 
 sources:
   - name: adventureworks
-    description: "Source schema for Adventure Works data"
+    description: Source schema 'sap_adw' containing AdventureWorks data
+      used for staging and transformation.
     database: adventureworks
     schema: sap_adw
     tables:
       - name: address
-        description: "Table containing address data"
+        description: Street address information for customers, employees, and vendors.
+        columns:
+          - name: address_id
+            description: Primary key for address records.
+            tests:
+              - unique
+              - not_null
+
+      - name: countryregion
+        description: Lookup table containing the ISO standard codes for countries and regions.
+        columns:
+          - name: country_region_code
+            description: ISO standard code for countries and regions.
+            tests:
+              - unique
+              - not_null
+
       - name: customer
-        description: "Customer details"
+        description: General customer information.
+        columns:
+          - name: customer_id
+            description: Primary key of the customer table
+            tests:
+              - unique
+              - not_null
+
+      - name: creditcard
+        description: Customer credit card information.
+        columns:
+          - name: creditcard_id
+            description: Primary key for the credit card records.
+            tests:
+              - unique
+              - not_null
+
+      - name: person
+        description: Human beings involved with AdventureWorks, employees, customer contacts, and vendor contacts.
+        columns:
+          - name: business_entity_id
+            description: Primary key for Person records.
+            tests:
+              - unique
+              - not_null
+
       - name: product
-        description: "Product details"
+        description: Products sold or used in the manufacturing of sold products.
+        columns:
+          - name: product_id
+            description: Primary key for the products table.
+            tests:
+              - unique
+              - not_null
+
+      - name: productcategory
+        description: High-level product categorization.
+        columns:
+          - name: product_category_id
+            description: Primary key for the product category table.
+            tests:
+              - unique
+              - not_null
+
       - name: productinventory
-        description: "Table containing inventory levels for products in different warehouses."
-      - name: salesorderdetail
-        description: "Sales order detail transactions"
+        description: Inventory of products in stock.
+        columns:
+          - name: product_id
+            description: Foreign key to the product table.
+            tests:
+              - not_null
+
+          - name: location_id
+            description: Foreign key to the location table.
+            tests:
+              - not_null
+
+          - name: quantity
+            description: Quantity of the product in stock.
+            tests:
+              - not_null
+
       - name: salesperson
-        description: "Salesperson information"
-      - name: salesterritory
-        description: "Geographical regions for sales territories"
+        description: General salesperson information.
+        columns:
+          - name: sales_person_id
+            description: Primary key of the salesperson table.
+            tests:
+              - unique
+              - not_null
+
+      - name: salesorderdetail
+        description: Individual products associated with a specific sales order. See SalesOrderHeader.
+        columns:
+          - name: order_detail_id
+            description: Primary key for each sales order detail record.
+            tests:
+              - unique
+              - not_null
+
       - name: salesorderheader
-        description: "High-level information about sales orders"
+        description: General sales order information.
+        columns:
+          - name: order_id
+            description: Primary key for each sales order.
+            tests:
+              - unique
+              - not_null
+
+      - name: salesorderheadersalesreason
+        description: Cross-reference table mapping sales orders to sales reason codes.
+        columns:
+          - name: "order_id || '-' || sales_reason_id"
+            description: Primary key for sales order reasons.
+            tests:
+              - unique
+              - not_null
+
+      - name: salesreason
+        description: Reasons for each purchase.
+        columns:
+          - name: sales_reason_id
+            description: Primary key for sales reason table.
+            tests:
+              - unique
+              - not_null
+
+      - name: stateprovince
+        description: State and province lookup table.
+        columns:
+          - name: state_province_id
+            description: ISO standard code for states and provinces.
+            tests:
+              - unique
+              - not_null
+
+      - name: store
+        description: Customers (resellers) of AdventureWorks products.
+        columns:
+          - name: business_entity_id
+            description: Primary key for store tables.
+            tests:
+              - unique
+              - not_null

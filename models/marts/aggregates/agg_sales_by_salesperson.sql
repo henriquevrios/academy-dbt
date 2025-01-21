@@ -1,30 +1,34 @@
 with
-    sales_with_salespersons as (
+    sales_data as (
         select
-            dsp.salesperson_id
-            , dsp.sales_quota
-            , dsp.bonus_amount
-            , fs.sales_amount
-            , fs.order_id
-        from {{ ref('fact_sales') }} fs
-        left join {{ ref('dim_salespersons') }} dsp
-            on fs.product_id = dsp.salesperson_id
+            s.order_id
+            , s.sales_person_id
+            , s.total_due
+            , s.taxamt
+            , s.freight
+            , sp.full_name as sales_person_name
+        from {{ ref('stg_salesorder') }} s
+        left join {{ ref('dim_salesperson') }} sp
+            on s.sales_person_id = sp.sales_person_id
     )
-    , aggregated_data as (
+
+    , aggregated_salesperson as (
         select
-            salesperson_id
-            , sum(sales_amount) as total_sales
+            sales_person_id
+            , sales_person_name
             , count(order_id) as total_orders
-            , max(sales_quota) as max_sales_quota
-            , sum(bonus_amount) as total_bonus
-        from sales_with_salespersons
-        group by salesperson_id
+            , sum(total_due) as total_sales
+            , sum(taxamt) as total_tax
+            , sum(freight) as total_freight
+        from sales_data
+        group by sales_person_id, sales_person_name
     )
 
 select
-    salesperson_id
-    , total_sales
+    sales_person_id
+    , sales_person_name
     , total_orders
-    , max_sales_quota
-    , total_bonus
-from aggregated_data
+    , total_sales
+    , total_tax
+    , total_freight
+from aggregated_salesperson

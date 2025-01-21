@@ -1,24 +1,35 @@
 with
-    sales_with_regions as (
+    sales_data as (
         select
-            dr.region_name as region
-            , fs.sales_amount
-            , fs.order_id
-        from {{ ref('fact_sales') }} fs
-        left join {{ ref('dim_regions') }} dr
-            on fs.product_id = dr.region_id
+            s.order_id
+            , s.sales_person_id
+            , s.total_due
+            , s.taxamt
+            , s.freight
+            , l.state_or_province_name
+            , l.country_name
+        from {{ ref('stg_salesorder') }} s
+        left join {{ ref('dim_locations') }} l
+            on s.bill_to_address_id = l.address_id
     )
-    , aggregated_data as (
+
+    , aggregated_region as (
         select
-            region
-            , sum(sales_amount) as total_sales
+            state_or_province_name
+            , country_name
             , count(order_id) as total_orders
-        from sales_with_regions
-        group by region
+            , sum(total_due) as total_sales
+            , sum(taxamt) as total_tax
+            , sum(freight) as total_freight
+        from sales_data
+        group by state_or_province_name, country_name
     )
 
 select
-    region
-    , total_sales
+    state_or_province_name
+    , country_name
     , total_orders
-from aggregated_data
+    , total_sales
+    , total_tax
+    , total_freight
+from aggregated_region

@@ -1,0 +1,42 @@
+version: 2
+
+models:
+  - name: dim_locations
+    description: "Dimensional model for locations, including address, state/province, and country details."
+    columns:
+      - name: sk_address
+        description: "Surrogate key for the address dimension, generated using address_id and postalcode."
+        tests:
+          - unique
+          - not_null
+
+      - name: address_id
+        description: "Primary key for the address record, sourced from the staging table."
+
+      - name: full_address
+        description: "Complete address, concatenated from multiple address fields."
+
+      - name: city
+        description: "City name for the address."
+
+      - name: postalcode
+        description: "Postal code for the address."
+
+      - name: is_province_flag
+        description: "Indicator if the location is a province or not, derived from the state/province data."
+
+      - name: state_or_province_name
+        description: "Name of the state or province associated with the address."
+        tests:
+          - not_null
+
+      - name: territory_id
+        description: "Territory identifier for the state or province."
+        tests:
+          - not_null
+
+      - name: country_code
+        description: "Country code in ISO format, associated with the state or province."
+
+      - name: country_name
+        description: "Full name of the country associated with the state or province."
