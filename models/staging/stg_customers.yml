@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: "Staging table for customer data from Adventure Works."
+    columns:
+      - name: customer_id
+        description: "Unique identifier for each customer."
+        tests:
+          - not_null
+          - unique
+      - name: person_id
+        description: "Unique identifier for the person associated with the customer."
+      - name: store_id
+        description: "Identifier for the store associated with the customer."
+      - name: territory_id
+        description: "Identifier for the territory of the customer."
+      - name: rowguid
+        description: "Unique identifier for the record."
+      - name: last_update_date
+        description: "The last date the customer data was updated."

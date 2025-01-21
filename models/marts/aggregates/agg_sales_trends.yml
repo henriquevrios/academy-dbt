@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: agg_sales_trends
+    description: "Aggregated sales trends analysis by month and year"
+    columns:
+      - name: sales_month
+        description: "Month of the sale"
+        tests:
+          - not_null
+
+      - name: sales_year
+        description: "Year of the sale"
+        tests:
+          - not_null
+
+      - name: total_sales_amount
+        description: "Total sales amount for the period"
+        tests:
+          - not_null
+
+      - name: total_orders
+        description: "Total orders for the period"
+        tests:
+          - not_null
+
+      - name: average_sales_per_order
+        description: "Average sales amount per order"
+        tests:
+          - not_null

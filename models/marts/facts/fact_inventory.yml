@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: fact_inventory
+    description: "Fact table that tracks inventory levels across warehouses."
+    columns:
+      - name: product_id
+        description: "Unique identifier for the product."
+        tests:
+          - not_null
+      - name: stock_level
+        description: "Current stock level of the product."
+        tests:
+          - not_null
+      - name: last_update_date
+        description: "The most recent date when the inventory data was updated."
+        tests:
+          - not_null

@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: int_inventory_movements
+    description: "Intermediate table to track inventory movements,
+      showing changes in stock levels for each product in each warehouse."
+    columns:
+      - name: product_id
+        description: "Unique identifier for the product."
+        tests:
+          - not_null
+      - name: warehouse_id
+        description: "Unique identifier for the warehouse."
+        tests:
+          - not_null
+      - name: last_update_date
+        description: "Timestamp of the last inventory update."
+        tests:
+          - not_null
+      - name: stock_level
+        description: "Current stock level for the product in the warehouse."
+      - name: previous_stock_level
+        description: "Stock level for the product in the warehouse before the last update."
+      - name: stock_change
+        description: "Difference between the current and previous stock levels."

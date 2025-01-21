@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: dim_orders
+    description: "Dimension table containing details of orders."
+    columns:
+      - name: order_sk
+        description: "Surrogate key for the order."
+        tests:
+          - not_null
+          - unique
+      - name: order_id
+        description: "Unique identifier for the order."
+        tests:
+          - not_null
+      - name: customer_id
+        description: "Foreign key referencing the customer associated with the order."
+      - name: salesperson_id
+        description: "Foreign key referencing the salesperson associated with the order."
+      - name: territory_id
+        description: "Sales territory associated with the order."
+      - name: is_online_order
+        description: "Indicates if the order was placed online."
+      - name: order_date
+        description: "Date when the order was placed."
+      - name: due_date
+        description: "Date when the order is due to be completed."
+      - name: ship_date
+        description: "Date when the order was shipped."

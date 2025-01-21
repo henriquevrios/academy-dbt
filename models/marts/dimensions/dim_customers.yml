@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: "Dimension table containing customer details."
+    columns:
+      - name: customer_sk
+        description: "Surrogate key for the customer."
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: "Unique identifier for each customer."
+        tests:
+          - not_null
+          - unique
+      - name: store_id
+        description: "Identifier of the store associated with the customer."
+      - name: territory_id
+        description: "Identifier of the territory associated with the customer."
+      - name: last_update_date
+        description: "Date when the customer record was last updated."

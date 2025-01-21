@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: stg_date
+    description: "Staging table that generates a range of dates spanning 100 years (2000-01-01 to 2100-12-31)."
+    columns:
+      - name: date
+        description: "Date field generated for the range of 100 years."
+        tests:
+          - not_null
+          - unique

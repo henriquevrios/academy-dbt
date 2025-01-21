@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: dim_regions
+    description: "Dimension table containing geographical region information."
+    columns:
+      - name: region_sk
+        description: "Surrogate key for the region."
+        tests:
+          - not_null
+          - unique
+      - name: region_id
+        description: "Unique identifier for the region."
+        tests:
+          - not_null
+          - unique
+      - name: region_name
+        description: "Name of the geographical region."
+        tests:
+          - not_null

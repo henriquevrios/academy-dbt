@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: fact_sales
+    description: "Fact table for sales data, including customer, product, region, and sales-related metrics."
+    columns:
+      - name: order_id
+        description: "Unique identifier for each order."
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: "Identifier for the customer associated with the order."
+        tests:
+          - not_null
+      - name: product_id
+        description: "Identifier for the product included in the order."
+        tests:
+          - not_null
+      - name: sales_date
+        description: "The date when the sale was made."
+        tests:
+          - not_null
+      - name: region
+        description: "The geographical region where the sale occurred."
+      - name: sales_quantity
+        description: "The quantity of products sold in the order."
+        tests:
+          - not_null
+      - name: sales_amount
+        description: "The total monetary amount of the sale (quantity multiplied by unit price)."
+        tests:
+          - not_null

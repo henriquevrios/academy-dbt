@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: dim_date
+    description: "Dimension table that provides detailed calendar information for analysis."
+    columns:
+      - name: date
+        description: "The actual date."
+        tests:
+          - not_null
+          - unique
+      - name: year
+        description: "Year of the date."
+        tests:
+          - not_null
+      - name: quarter
+        description: "Quarter of the year (1 to 4)."
+        tests:
+          - not_null
+      - name: month
+        description: "Numeric month of the date."
+        tests:
+          - not_null
+      - name: month_name
+        description: "Full name of the month (e.g., January)."
+      - name: day
+        description: "Day of the month."
+        tests:
+          - not_null
+      - name: day_of_week
+        description: "Day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)."
+        tests:
+          - not_null
+      - name: day_name
+        description: "Full name of the day of the week (e.g., Monday)."
+      - name: is_weekend
+        description: "Boolean flag indicating if the date is a weekend (true/false)."
+        tests:
+          - not_null
+      - name: week_start_date
+        description: "The date of the starting Monday for the week."
+      - name: week_number
+        description: "ISO week number of the date."
+      - name: day_of_year
+        description: "Day of the year (1 to 365/366)."

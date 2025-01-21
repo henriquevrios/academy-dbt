@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: int_orders_details
+    description: "Intermediate table consolidating detailed information about orders, including products, customers, and pricing."
+    columns:
+      - name: order_id
+        description: "Unique identifier for the sales order."
+        tests:
+          - not_null
+          - unique
+      - name: product_id
+        description: "Identifier for the product in the order."
+        tests:
+          - not_null
+      - name: customer_id
+        description: "Identifier for the customer who placed the order."
+        tests:
+          - not_null
+      - name: order_date
+        description: "The date the order was placed."
+        tests:
+          - not_null
+      - name: quantity
+        description: "Quantity of the product ordered."
+        tests:
+          - not_null
+      - name: unit_price
+        description: "Price per unit of the product."
+      - name: total_price
+        description: "Total price for the product in the order (quantity * unit_price)."
+        tests:
+          - not_null
