@@ -10,7 +10,7 @@ sources:
       - name: address
         description: Street address information for customers, employees, and vendors.
         columns:
-          - name: address_id
+          - name: addressid
             description: Primary key for address records.
             tests:
               - unique
@@ -19,7 +19,7 @@ sources:
       - name: countryregion
         description: Lookup table containing the ISO standard codes for countries and regions.
         columns:
-          - name: country_region_code
+          - name: countryregioncode
             description: ISO standard code for countries and regions.
             tests:
               - unique
@@ -28,7 +28,7 @@ sources:
       - name: customer
         description: General customer information.
         columns:
-          - name: customer_id
+          - name: customerid
             description: Primary key of the customer table
             tests:
               - unique
@@ -37,7 +37,7 @@ sources:
       - name: creditcard
         description: Customer credit card information.
         columns:
-          - name: creditcard_id
+          - name: creditcardid
             description: Primary key for the credit card records.
             tests:
               - unique
@@ -46,7 +46,7 @@ sources:
       - name: person
         description: Human beings involved with AdventureWorks, employees, customer contacts, and vendor contacts.
         columns:
-          - name: business_entity_id
+          - name: businessentityid
             description: Primary key for Person records.
             tests:
               - unique
@@ -55,7 +55,7 @@ sources:
       - name: product
         description: Products sold or used in the manufacturing of sold products.
         columns:
-          - name: product_id
+          - name: productid
             description: Primary key for the products table.
             tests:
               - unique
@@ -64,7 +64,7 @@ sources:
       - name: productcategory
         description: High-level product categorization.
         columns:
-          - name: product_category_id
+          - name: productcategoryid
             description: Primary key for the product category table.
             tests:
               - unique
@@ -73,12 +73,12 @@ sources:
       - name: productinventory
         description: Inventory of products in stock.
         columns:
-          - name: product_id
+          - name: productid
             description: Foreign key to the product table.
             tests:
               - not_null
 
-          - name: location_id
+          - name: locationid
             description: Foreign key to the location table.
             tests:
               - not_null
@@ -91,7 +91,7 @@ sources:
       - name: salesperson
         description: General salesperson information.
         columns:
-          - name: sales_person_id
+          - name: businessentityid
             description: Primary key of the salesperson table.
             tests:
               - unique
@@ -100,8 +100,12 @@ sources:
       - name: salesorderdetail
         description: Individual products associated with a specific sales order. See SalesOrderHeader.
         columns:
-          - name: order_detail_id
+          - name: salesorderid
             description: Primary key for each sales order detail record.
+            tests:
+              - not_null
+          - name: salesorderdetailid
+            description: Unique identifier for each sales order detail.
             tests:
               - unique
               - not_null
@@ -109,7 +113,7 @@ sources:
       - name: salesorderheader
         description: General sales order information.
         columns:
-          - name: order_id
+          - name: salesorderid
             description: Primary key for each sales order.
             tests:
               - unique
@@ -118,7 +122,7 @@ sources:
       - name: salesorderheadersalesreason
         description: Cross-reference table mapping sales orders to sales reason codes.
         columns:
-          - name: "order_id || '-' || sales_reason_id"
+          - name: "salesorderid || '-' || salesreasonid"
             description: Primary key for sales order reasons.
             tests:
               - unique
@@ -127,7 +131,7 @@ sources:
       - name: salesreason
         description: Reasons for each purchase.
         columns:
-          - name: sales_reason_id
+          - name: salesreasonid
             description: Primary key for sales reason table.
             tests:
               - unique
@@ -136,7 +140,7 @@ sources:
       - name: stateprovince
         description: State and province lookup table.
         columns:
-          - name: state_province_id
+          - name: stateprovinceid
             description: ISO standard code for states and provinces.
             tests:
               - unique
@@ -145,7 +149,7 @@ sources:
       - name: store
         description: Customers (resellers) of AdventureWorks products.
         columns:
-          - name: business_entity_id
+          - name: businessentityid
             description: Primary key for store tables.
             tests:
               - unique
