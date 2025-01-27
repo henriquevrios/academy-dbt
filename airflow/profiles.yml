@@ -1,0 +1,13 @@
+default:
+  outputs:
+    dev:
+      type: snowflake
+      account: #insira sua conta
+      user: #insira seu usuário
+      password: #insira sua senha
+      role: ACCOUNTADMIN
+      database: adventureworks
+      warehouse: desafiofinal
+      schema: dbt_henriquerios
+      threads: 4
+  target: dev
